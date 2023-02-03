@@ -1,0 +1,36 @@
+package br.com.mundi.events;
+
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
+import java.util.Date;
+
+public class MemberJoin extends ListenerAdapter {
+
+    @Override
+    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
+
+        // Identifica o nome do membro que entrou no canal.
+        String joinedMember = event.getUser().getAsMention();
+
+        // ID do canal que mostrará a pessoa que entrou nos servidor.
+        TextChannel canalDeLogs = event.getGuild().getTextChannelById(1040589609836494859L);
+
+        // Verifica se o canal é nulo e caso não seja, retorna um embed com informações nenhum pouco importantes.
+        if ( canalDeLogs != null ) {
+            EmbedBuilder embed = new EmbedBuilder()
+                    .setTitle("Bem-vindo")
+                    .setDescription("Que a sua estadia seja curta, " + joinedMember)
+                    .setColor(Color.BLACK)
+                    .setThumbnail("https://i.imgur.com/dgLBXe4.png")
+                    .setTimestamp(new Date().toInstant());
+
+            canalDeLogs.sendMessageEmbeds(embed.build()).queue();
+        }
+
+    }
+}
