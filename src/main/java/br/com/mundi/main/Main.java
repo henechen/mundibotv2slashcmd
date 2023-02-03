@@ -17,11 +17,12 @@ import java.util.EnumSet;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        String token = System.getenv("BOT_TOKEN");
         /// <summary>
         /// Carrega o token pela variável criada em computador.
         /// Instância que inicia o bot.
         /// </summary>
+        String token = System.getenv("BOT_TOKEN");
+
         JDA api = JDABuilder.createDefault(token, EnumSet.allOf(GatewayIntent.class))
                 .setActivity(Activity.watching("Sessão da tarde"))
                 .build().awaitReady();
@@ -43,6 +44,8 @@ public class Main {
         api.addEventListener(new MemberLeave());
         api.addEventListener(new MessageReceived());
         api.addEventListener(new DeleteChannel());
+        api.addEventListener(new JoinedVoiceChannel());
+        api.addEventListener(new LeaveVoiceChannel());
 
 
         /// <summary>
