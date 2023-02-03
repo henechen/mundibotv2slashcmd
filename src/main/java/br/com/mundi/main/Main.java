@@ -17,29 +17,47 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         String token = System.getenv("BOT_TOKEN");
-
-        // Carrega o token pela variável criada em computador.
-        // Instância que inicia o bot.
+        /// <summary>
+        /// Carrega o token pela variável criada em computador.
+        /// Instância que inicia o bot.
+        /// </summary>
         JDA api = JDABuilder.createDefault(token, EnumSet.allOf(GatewayIntent.class))
                 .setActivity(Activity.watching("Sessão da tarde"))
                 .build().awaitReady();
 
-        // Registra os comandos no bot.
+        /// <summary>
+        /// Registro de comandos do bot
+        /// É necessário sempre adicionar um eventListener após criar um comando para o bot saber da existência.
+        /// </summary>
         api.addEventListener(new Ping());
         api.addEventListener(new Food());
         api.addEventListener(new Soma());
 
-        // Eventos
+        /// <summary>
+        /// Registro de eventos do bot
+        /// Funciona da mesma forma citada acima, porém, para eventos ao invés de comandos.
+        /// </summary>
         api.addEventListener(new MemberJoin());
         api.addEventListener(new MemberLeave());
         api.addEventListener(new MessageReceived());
         api.addEventListener(new DeleteChannel());
 
-        // Especifica um canal onde o slash command irá aparecer.
+
+        /// <summary>
+        /// Especifica em qual servidor os comandos rodarão.
+        /// Neste caso, como inicialmente o projeto abrange somente um servidor em específico
+        /// É passado o guildId (id do servidor) para se rodar os comandos.
+        /// </summary>
         Guild guild = api.getGuildById("1040548001803948042");
 
-        // Verifica se o canal não é nulo/deletado e retorna o preview
-        // Do nome do comando com uma descrição do que ele faz.
+        /// <summary>
+        /// Verificação para saber se o servidor é nulo ou não.
+        /// Caso não seja, os comandos são criados.
+        ///
+        /// upsertCommand é uma das formas para se criar/registrar um comando para aparecer no Discord
+        /// Quando se digitar /alguma coisa, consultar documentação do Discord caso tenha dúvidas
+        /// Ou se um dia eu tiver a paciência e boa vontade de colocar aqui.
+        /// </summary>
         if (guild != null) {
 
             guild.upsertCommand("ping", "retorna pong!").queue();

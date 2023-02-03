@@ -10,14 +10,20 @@ public class DeleteChannel extends ListenerAdapter {
     @Override
     public void onChannelDelete(@NotNull ChannelDeleteEvent event) {
 
-        // Identifica o nome do canal deletado.
+        /// <Summary>
+        /// Identifica o nome do canal deletado.
+        /// </Summary>
         String nomeDoCanal = event.getChannel().getName();
 
-        // ID do canal de logs para qual será enviado a mensagem de canal deletado.
+        /// <Summary>
+        /// ID do canal de logs para qual será enviado a mensagem de canal deletado.
+        /// </Summary>
         TextChannel canalDeLogs = event.getGuild().getTextChannelById(1067806975401918475L);
 
-        // Verificação para assegurar que o canal de logs não foi deletado.
-        // Resposta do bot para caso o canal seja deletado.
+        /// <Summary>
+        /// Verificação para assegurar que o canal de logs não foi deletado.
+        /// Resposta do bot para caso o canal seja deletado.
+        /// </Summary>
         if (canalDeLogs != null) {
             canalDeLogs.sendMessage("O canal: " + nomeDoCanal + " foi deletado.").queue();
         }

@@ -9,14 +9,22 @@ public class Ping extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
 
-        // Verifica se o comando é /ping e responde com pong! caso seja true.
+
+        /// <summary>
+        /// Verifica se o comando é /ping e responde com pong! caso seja true.
+        /// </summary>
         if (event.getName().equals("ping")) {
 
-            // Uma forma do bot comunicar de que recebeu o comando e está processando o mesmo.
+            /// <summary>
+            /// Linha 22 é usada como forma de comunicar ao usuário de que o bot
+            /// Recebeu o comando e está analisando/processando o mesmo.
+            /// </summary>
             event.deferReply().queue();
 
-            // Por causa do deferReply, para enviar uma mensagem ao invés de utilizar "event.reply"
-            // Se utiliza "event.getHook().sendMessage()".
+            /// <summary>
+            /// Por causa do deferReply, para enviar uma mensagem ao invés de utilizar "event.reply"
+            /// Se utiliza "event.getHook().sendMessage()".
+            /// </summary>
             event.getHook().sendMessage("pong!").queue();
         }
     }
