@@ -2,6 +2,7 @@ package br.com.mundi.main;
 
 import br.com.mundi.commands.Food;
 import br.com.mundi.commands.Ping;
+import br.com.mundi.commands.ShowAvatar;
 import br.com.mundi.commands.Soma;
 import br.com.mundi.events.*;
 import net.dv8tion.jda.api.JDA;
@@ -32,6 +33,7 @@ public class Main {
         api.addEventListener(new Ping());
         api.addEventListener(new Food());
         api.addEventListener(new Soma());
+        api.addEventListener(new ShowAvatar());
 
         /// <summary>
         /// Registro de eventos do bot
@@ -69,6 +71,10 @@ public class Main {
             guild.upsertCommand("soma", "adição de 2 números.")
                     .addOption(OptionType.INTEGER, "operador1", "primeiro número", true)
                     .addOption(OptionType.INTEGER, "operador2", "segundo número", true)
+                    .queue();
+
+            guild.upsertCommand("avatar", "mostra o avatar de um usuário")
+                    .addOption(OptionType.MENTIONABLE, "user", "mencione o usuário que deseja ver o avatar", false)
                     .queue();
         }
     }
