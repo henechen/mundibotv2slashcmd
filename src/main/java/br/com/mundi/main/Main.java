@@ -1,15 +1,13 @@
 package br.com.mundi.main;
 
-import br.com.mundi.commands.Food;
-import br.com.mundi.commands.Ping;
-import br.com.mundi.commands.ShowAvatar;
-import br.com.mundi.commands.Soma;
+import br.com.mundi.commands.*;
 import br.com.mundi.events.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import java.util.EnumSet;
@@ -27,6 +25,7 @@ public class Main {
                 .setActivity(Activity.watching("Sessão da tarde"))
                 .build().awaitReady();
 
+
         /// <summary>
         /// Registro de comandos do bot
         /// É necessário sempre adicionar um eventListener após criar um comando para o bot saber da existência.
@@ -35,6 +34,8 @@ public class Main {
         api.addEventListener(new Food());
         api.addEventListener(new Soma());
         api.addEventListener(new ShowAvatar());
+        api.addEventListener(new RandomGen());
+        api.addEventListener(new DeleteMessages());
 
         /// <summary>
         /// Registro de eventos do bot
@@ -44,6 +45,7 @@ public class Main {
         api.addEventListener(new MemberLeave());
         api.addEventListener(new MessageReceived());
         api.addEventListener(new DeleteChannel());
+        api.addEventListener(new CreateChannel());
         api.addEventListener(new JoinedVoiceChannel());
         api.addEventListener(new LeaveVoiceChannel());
 
@@ -72,12 +74,23 @@ public class Main {
                     .queue();
 
             guild.upsertCommand("soma", "adição de 2 números.")
-                    .addOption(OptionType.INTEGER, "operador1", "primeiro número", true)
-                    .addOption(OptionType.INTEGER, "operador2", "segundo número", true)
+                    .addOptions(
+                            new OptionData(OptionType.INTEGER, "operador1", "primeiro número a ser somado", true),
+                            new OptionData(OptionType.INTEGER, "operador2", "segundo número a ser somado", true)
+                    )
                     .queue();
 
             guild.upsertCommand("avatar", "mostra o avatar de um usuário")
                     .addOption(OptionType.MENTIONABLE, "user", "mencione o usuário que deseja ver o avatar", false)
+                    .queue();
+
+            guild.upsertCommand("random", "gera um número aleatório entre 0 e 10.").queue();
+
+            guild.upsertCommand("delete", "Deleta mensagens da sala, mínimo 2 máximo 100 em um período de 2 semanas.")
+                    .addOptions(
+                            new OptionData(OptionType.INTEGER, "amount", "Quantidade de mensagens a ser apagada. Limite de 2 a 100 em 2 semanas.", true)
+                                    .setRequiredRange(2, 100)
+                    )
                     .queue();
         }
     }
