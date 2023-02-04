@@ -14,19 +14,19 @@ public class MemberLeave extends ListenerAdapter {
     @Override
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
 
-        /// <Summary>
+        /// <summary>
         /// Identifica o nome do membro que saiu do servidor.
-        /// </Summary>
+        /// </summary>
         String removedMember = event.getUser().getAsMention();
 
-        /// <Summary>
+        /// <summary>
         /// ID do canal que mostrará a pessoa que saiu do Discord.
-        /// </Summary>
+        /// </summary>
         TextChannel canalDeLogs = event.getGuild().getTextChannelById(1040589609836494859L);
 
-        /// <Summary>
+        /// <summary>
         /// Verifica se o canal é nulo e caso não seja, retorna um embed com informações nenhum pouco importantes.
-        /// </Summary>
+        /// </summary>
         if ( canalDeLogs != null ) {
             EmbedBuilder embed = new EmbedBuilder()
                     .setTitle("Adios, fdp")

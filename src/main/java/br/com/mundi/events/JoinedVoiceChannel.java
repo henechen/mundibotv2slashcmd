@@ -7,24 +7,24 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class JoinedVoiceChannel extends ListenerAdapter {
 
-    /// <Summary>
+    /// <summary>
     /// Evento que verifica quando uma pessoa entrou em um voice channel e informa qual voice channel ela entrou
-    /// </Summary>
+    /// </summary>
     @Override
     public void onGuildVoiceUpdate(GuildVoiceUpdateEvent event) {
 
         VoiceChannel voiceChannel = (VoiceChannel) event.getChannelJoined();
 
-        /// <Summary>
+        /// <summary>
         /// Seta o canal de logs do Discord.
         /// Passado manualmente
-        /// </Summary>
+        /// </summary>
         TextChannel canalDeLogs = event.getGuild().getTextChannelById(1067806975401918475L);
 
-        /// <Summary>
+        /// <summary>
         /// Verifica tanto se o canal de logs quanto o canal de voz existem
         /// E caso seja true, retorna o log.
-        /// </Summary>
+        /// </summary>
         if ( canalDeLogs != null && voiceChannel != null) {
 
             canalDeLogs.sendMessage(event.getMember().getAsMention() + " entrou no canal de voz " + voiceChannel.getAsMention()).queue();

@@ -14,19 +14,19 @@ public class MemberJoin extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
 
-        /// <Summary>
+        /// <summary>
         /// Identifica o nome do membro que entrou no canal.
-        /// </Summary>
+        /// </summary>
         String joinedMember = event.getUser().getAsMention();
 
-        /// <Summary>
+        /// <summary>
         /// ID do canal que mostrará a pessoa que entrou nos servidor.
-        /// </Summary>
+        /// </summary>
         TextChannel canalDeLogs = event.getGuild().getTextChannelById(1040589609836494859L);
 
-        /// <Summary>
+        /// <summary>
         /// Verifica se o canal é nulo e caso não seja, retorna um embed com informações nenhum pouco importantes.
-        /// </Summary>
+        /// </summary>
         if ( canalDeLogs != null ) {
             EmbedBuilder embed = new EmbedBuilder()
                     .setTitle("Bem-vindo")

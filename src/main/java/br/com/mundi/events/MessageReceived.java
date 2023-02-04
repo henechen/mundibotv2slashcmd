@@ -7,9 +7,9 @@ import org.jetbrains.annotations.NotNull;
 public class MessageReceived extends ListenerAdapter {
 
 
-    /// <Summary>
+    /// <summary>
     /// Arquivo de teste somente para estudo.
-    /// </Summary>
+    /// </summary>
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
 
