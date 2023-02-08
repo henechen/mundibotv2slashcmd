@@ -36,6 +36,8 @@ public class Main {
         api.addEventListener(new ShowAvatar());
         api.addEventListener(new RandomGen());
         api.addEventListener(new DeleteMessages());
+        api.addEventListener(new SetJoinChannel());
+        api.addEventListener(new SetLeaveChannel());
 
         /// <summary>
         /// Registro de eventos do bot
@@ -92,6 +94,10 @@ public class Main {
                                     .setRequiredRange(2, 100)
                     )
                     .queue();
+
+            guild.upsertCommand("setjoinchannel", "Seta o canal atual como canal de logs de entrada.").queue();
+
+            guild.upsertCommand("setleavechannel", "Seta o canal atual como canal de logs de saída.").queue();
         }
     }
 
