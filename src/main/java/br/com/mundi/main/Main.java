@@ -38,6 +38,7 @@ public class Main {
         api.addEventListener(new DeleteMessages());
         api.addEventListener(new SetJoinChannel());
         api.addEventListener(new SetLeaveChannel());
+        api.addEventListener(new SetLogChannel());
 
         /// <summary>
         /// Registro de eventos do bot
@@ -98,6 +99,8 @@ public class Main {
             guild.upsertCommand("setjoinchannel", "Seta o canal atual como canal de logs de entrada.").queue();
 
             guild.upsertCommand("setleavechannel", "Seta o canal atual como canal de logs de saída.").queue();
+
+            guild.upsertCommand("setlogchannel", "Seta o canal triggado como canal de logs.").queue();
         }
     }
 
