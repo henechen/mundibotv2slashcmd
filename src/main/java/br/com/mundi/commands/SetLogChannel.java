@@ -1,5 +1,6 @@
 package br.com.mundi.commands;
 
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
 import net.dv8tion.jda.api.events.channel.ChannelCreateEvent;
@@ -20,9 +21,16 @@ public class SetLogChannel extends ListenerAdapter {
 
         if (event.getName().equalsIgnoreCase("setlogchannel")) {
 
-            currentChannel = event.getChannel().getIdLong();
+            if (event.getMember().hasPermission(Permission.ADMINISTRATOR)) {
 
-            event.reply("O canal " + event.getChannel().getAsMention() + " foi setado como canal de logs.").queue();
+                currentChannel = event.getChannel().getIdLong();
+
+                event.deferReply(true).queue();
+
+                event.getHook().sendMessage("O canal " + event.getChannel().getAsMention() + " foi setado como canal de logs.").queue();
+            } else {
+                event.getHook().sendMessage("Você não tem acesso a este comando.").queue();
+            }
         }
     }
 
