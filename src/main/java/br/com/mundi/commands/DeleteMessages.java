@@ -33,7 +33,7 @@ public class DeleteMessages extends ListenerAdapter {
             /// O bot leve mais tempo que o máximo permitido para
             /// Executar o comando sem o deferReply()
             /// </summary>
-            event.deferReply().queue();
+            event.deferReply(true).queue();
 
 
             /// <summary>
