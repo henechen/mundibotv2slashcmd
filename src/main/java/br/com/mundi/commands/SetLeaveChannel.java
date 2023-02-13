@@ -21,7 +21,9 @@ public class SetLeaveChannel extends ListenerAdapter {
 
             currChannel = event.getChannel().getIdLong();
 
-            event.reply("O canal " + event.getChannel().getAsMention() + " foi setado como canal de leave logs.").queue();
+            event.deferReply(true).queue();
+
+            event.getHook().sendMessage("O canal " + event.getChannel().getAsMention() + " foi setado como canal de join log.").queue();
         }
     }
 
@@ -46,11 +48,12 @@ public class SetLeaveChannel extends ListenerAdapter {
         /// </summary>
         if ( canalDeLogs != null ) {
             EmbedBuilder embed = new EmbedBuilder()
+                    .setColor(new Color((int) (Math.random() * 0x1000000)))
+                    .setThumbnail(event.getUser().getAvatarUrl())
                     .setTitle("Bem-vindo")
-                    .setDescription("Que pena que você foi embora " + leftMember + " :)")
-                    .setColor(Color.BLACK)
-                    .setThumbnail("https://i.imgur.com/dgLBXe4.png")
-                    .setTimestamp(new Date().toInstant());
+                    .setDescription("Que a sua estadia seja curta, " + leftMember)
+                    .setTimestamp(new Date().toInstant())
+                    .setFooter("MVNDI", event.getGuild().getIconUrl());
 
             canalDeLogs.sendMessageEmbeds(embed.build()).queue();
         }
