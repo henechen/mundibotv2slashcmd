@@ -16,7 +16,7 @@ jar {
 group 'br.com.mundi'
 version '1.0'
 
-def jdaVersion = '5.0.0-beta.3'
+def jdaVersion = '5.0.0-beta.9'
 
 sourceCompatibility = targetCompatibility = 1.8
 
